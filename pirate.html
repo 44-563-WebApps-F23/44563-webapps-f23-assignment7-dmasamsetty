@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,43 +32,99 @@
         <div style="color:blue">Click on the locations to search for treasure, beware the traps</div>
         <div id = "locations" style="background-color:antiquewhite; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; ">Number of locations checked is zero</div>
         <div id = "penalty" style="color:chartreuse; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Penalty is zero</div>
-        <div style="background-color: antiquewhite; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Click for help.</div>
+        <div style="background-color: antiquewhite; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" onclick="help()">Click for help.</div>
         <div id = "help" style="color: brown; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Help report</div>
+        
         <div class="container">
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
+            <div><img src ="location.jpg" id ="0" onclick="check(0)"></div>
+            <div><img src ="location.jpg" id ="1" onclick="check(1)"></div>
+            <div><img src ="location.jpg" id ="2" onclick="check(2)"></div>
+            <div><img src ="location.jpg" id ="3" onclick="check(3)"></div>
+            <div><img src ="location.jpg" id ="4" onclick="check(4)"></div>
         </div>
         <div class="container">
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
+            <div><img src ="location.jpg" id ="5" onclick="check(5)"></div>
+            <div><img src ="location.jpg" id ="6" onclick="check(6)"></div>
+            <div><img src ="location.jpg" id ="7" onclick="check(7)"></div>
+            <div><img src ="location.jpg" id ="8" onclick="check(8)"></div>
+            <div><img src ="location.jpg" id ="9" onclick="check(9)"></div>
         </div>
         <div class="container">
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
+            <div><img src ="location.jpg" id ="10" onclick="check(10)"></div>
+            <div><img src ="location.jpg" id ="11" onclick="check(11)"></div>
+            <div><img src ="location.jpg" id ="12" onclick="check(12)"></div>
+            <div><img src ="location.jpg" id ="13" onclick="check(13)"></div>
+            <div><img src ="location.jpg" id ="14" onclick="check(14)"></div>
         </div>
         <div class="container">
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
+            <div><img src ="location.jpg" id ="15" onclick="check(15)"></div>
+            <div><img src ="location.jpg" id ="16" onclick="check(16)"></div>
+            <div><img src ="location.jpg" id ="17" onclick="check(17)"></div>
+            <div><img src ="location.jpg" id ="18" onclick="check(18)"></div>
+            <div><img src ="location.jpg" id ="19" onclick="check(19)"></div>
         </div>
         <div class="container">
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
-            <div><img src ="location.jpg"></div>
+            <div><img src ="location.jpg" id ="20" onclick="check(20)"></div>
+            <div><img src ="location.jpg" id ="21" onclick="check(21)"></div>
+            <div><img src ="location.jpg" id ="22" onclick="check(22)"></div>
+            <div><img src ="location.jpg" id ="23" onclick="check(23)"></div>
+            <div><img src ="location.jpg" id ="24" onclick="check(24)"></div>
+
         </div>
+        <script>
+            var ids =["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"]
+            var checkCount = 0
+            var penalty =0
+            var lastCheck =0
+             var treasureLocation =5
+             var trapLocation = 18
+              var gameOver = false
+              function check(position){
+            if(gameOver){return;}
+            var id = ids[position];
+            var imageElement = document.getElementById(id);
+
+            if(position == treasureLocation){
+                imageElement.src = "treasure.png"; 
+                gameOver = true;
+                penalty -= 3;
+            }
+            else if(position == trapLocation){
+                imageElement.src = "trap.jpg";
+                gameOver = true;
+                penalty += 4;
+            }
+            else{
+                imageElement.src = "pirate.jpg";
+                penalty++
+            }
+            checkCount++;            
+            document.getElementById("locations").innerHTML =  "Number of locations checked is : " + checkCount;
+            document.getElementById("penalty").innerHTML = "Penalty is : " + penalty;
+            lastCheck = position;
+        }
+        function help(){
+            var helpText = "";
+            var treasureCol = parseInt(treasureLocation % 5);
+            var treasureRow = parseInt(treasureLocation / 5);
+            var lastCheckCol = parseInt(lastCheck % 5);
+            var lastCheckRow = parseInt(lastCheck / 5);
+            var colCondition = treasureCol == lastCheckCol;
+            var rowCondition = treasureRow == lastCheckRow;
+            var colDiff = Math.abs(lastCheckCol - treasureCol);
+            var rowDiff = Math.abs(lastCheckRow - treasureRow);
+            if(colCondition || rowCondition) {
+                if(rowDiff == 1 || colDiff == 1) {helpText = "Can Smell It";}
+                else if(rowDiff == 2 || colDiff == 2){helpText = "Close Matie";}
+                else {helpText = "Step Faster"}
+            }
+            else if(rowDiff == 1 && colDiff == 1){helpText = "Close Matie";}
+            else{helpText = "Step Faster";}
+            penalty += 2;
+            document.getElementById("penalty").innerHTML = "Penalty is : " + penalty;
+            document.getElementById("help").innerHTML = helpText;
+        }     
+        </script>
 
     </body>
 
