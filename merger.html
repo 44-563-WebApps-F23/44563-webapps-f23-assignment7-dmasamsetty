@@ -37,6 +37,7 @@
 		<button onclick="makeNewDiv()">Add end</button>
 		<button onclick="remove()">Remove</button>
 		<button onclick="addFront()">Add front</button>
+		<button onclick="swap()">Swap</button>
 	</body>
 <script>
 	function makeNewDiv(){
@@ -64,6 +65,21 @@
 		elements.innerHTML=input
 		container=document.getElementById('target')
 		container.insertBefore(elements,container.firstChild)
+	}
+	function swap()
+	{
+		let mergerItems=document.getElementsByClassName("merger");
+		let container=document.getElementById("target");
+		let sp1=Math.floor(Math.random()*mergerItems.length);
+		let sp2=Math.floor(Math.random()*mergerItems.length);
+		let I1=document.getElementsByClassName("merger")[sp1];
+		let I2=document.getElementsByClassName("merger")[sp2];
+		if(mergerItems.length>1)
+		{
+			let temp=I1.innerHTML;
+			I1.innerHTML=I2.innerHTML;
+			I2.innerHTML=temp;
+		}
 	}
 </script>
 </html>	
