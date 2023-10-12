@@ -35,9 +35,9 @@
 		</p>
 		<input type="text" id="input">
 		<button onclick="makeNewDiv()">Add end</button>
-	
-	
-</body>
+		<button onclick="remove()">Remove</button>
+		<button onclick="addFront()">Add front</button>
+	</body>
 <script>
 	function makeNewDiv(){
 		input=document.getElementById('input').value	
@@ -46,6 +46,24 @@
 		el.innerHTML=input
 		container=document.getElementById('target')
 		container.appendChild(el)		
+	}
+	function remove()
+	{
+		var mergerItems=document.getElementsByClassName("merger")
+		var length=mergerItems.length
+		if(length>0)
+		{
+			mergerItems[Math.floor(length/2)].remove();
+		}
+	}
+	function addFront()
+	{
+		input=document.getElementById("input").value
+		elements=document.createElement("div")
+		elements.className="merger"
+		elements.innerHTML=input
+		container=document.getElementById('target')
+		container.insertBefore(elements,container.firstChild)
 	}
 </script>
 </html>	
