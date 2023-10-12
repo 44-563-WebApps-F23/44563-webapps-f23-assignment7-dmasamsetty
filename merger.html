@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html> <head>
+	<title>Merging</title> <style>
+    .flex-container {
+      display: flex;  flex-direction:row;
+      background-color: red;
+  }
+
+.flex-container > div {  /*div children of the flex container*/
+  background-color: #f1f1f1; 
+  margin: 10px;  padding: 20px;  font-size: 30px;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) { 
+	 .flex-container{
+		 flex-direction:column;
+		 background-color: green;
+	  }
+	}
+</style></head>
+
+
+
+<body>
+	<h1>Dimple Masamsetty Suresh  builds a 
+		merger</h1>
+		<div class="flex-container" id="target">
+			<div class="merger">row item 1</div>   
+			<div class="merger">row item 2</div>  
+			<div class="merger">row item 3</div>  
+		  </div>
+	
+	<p> Press the button to create an new element of type div and then add it to the container.
+		</p>
+		<input type="text" id="input">
+		<button onclick="makeNewDiv()">Add end</button>
+	
+	
+</body>
+<script>
+	function makeNewDiv(){
+		input=document.getElementById('input').value	
+		el=document.createElement("div")
+		el.className="merger"
+		el.innerHTML=input
+		container=document.getElementById('target')
+		container.appendChild(el)		
+	}
+</script>
+</html>	
